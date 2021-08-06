@@ -9,8 +9,8 @@ export const SIZES = {
 };
 
 export const IMAGES = {
-  Logo: require('../assets/images/logo.png'),
-  DoorLock: require('../assets/images/door-lock-icon.png'),
+  Logo: require('../assets/logo.png'),
+  DoorLock: require('../assets/door-lock-icon.png'),
 };
 
 export const COLORS = {
