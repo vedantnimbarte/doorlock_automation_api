@@ -1,19 +1,13 @@
 import React from 'react';
-import {Text, View, StyleSheet, StatusBar} from 'react-native';
+import {Text} from 'react-native';
+import {NavigationContainer} from '@react-navigation/native';
 
 const App = () => {
   return (
-    <View style={styles.mainContainer}>
+    <NavigationContainer>
       <Text>App.js</Text>
-    </View>
+    </NavigationContainer>
   );
 };
-
-const styles = StyleSheet.create({
-  mainContainer: {
-    ...StyleSheet.absoluteFillObject,
-    backgroundColor: 'white',
-  },
-});
 
 export default App;
