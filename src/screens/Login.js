@@ -6,51 +6,58 @@ import {
   Image,
   TextInput,
   TouchableOpacity,
+  KeyboardAvoidingView,
+  ScrollView,
 } from 'react-native';
 import {COLORS, IMAGES, SIZES} from '../constants/theme';
 
 const Login = () => {
   return (
-    <View style={styles.mainContainer}>
-      <Image source={IMAGES.Logo} style={styles.logo} />
-      <View style={styles.headerContainer}>
-        <Text style={styles.headerText}>Capstone Automation</Text>
-        <Text style={styles.subHeaderText}>Login to your account</Text>
-      </View>
-      <View style={styles.formContainer}>
-        <TextInput
-          keyboardType="email-address"
-          placeholder="Email"
-          placeholderTextColor={COLORS.Primary}
-          style={styles.inputField}
-        />
-        <TextInput
-          keyboardType="default"
-          secureTextEntry={true}
-          placeholder="Password"
-          placeholderTextColor={COLORS.Primary}
-          style={styles.inputField}
-        />
-        <TouchableOpacity style={styles.loginBtn}>
-          <Text style={styles.loginText}>Login</Text>
-        </TouchableOpacity>
-      </View>
-    </View>
+    <KeyboardAvoidingView style={{flex: 1, backgroundColor: COLORS.Background}}>
+      <ScrollView bounces={false} showsVerticalScrollIndicator={false}>
+        <View style={styles.mainContainer}>
+          <Image source={IMAGES.Logo} style={styles.logo} />
+          <View style={styles.headerContainer}>
+            <Text style={styles.headerText}>Capstone Automation</Text>
+            <Text style={styles.subHeaderText}>Login to your account</Text>
+          </View>
+          <View style={styles.formContainer}>
+            <TextInput
+              keyboardType="email-address"
+              placeholder="Email"
+              placeholderTextColor={COLORS.Primary}
+              style={styles.inputField}
+            />
+            <TextInput
+              keyboardType="default"
+              secureTextEntry={true}
+              placeholder="Password"
+              placeholderTextColor={COLORS.Primary}
+              style={styles.inputField}
+            />
+            <TouchableOpacity style={styles.loginBtn}>
+              <Text style={styles.loginText}>Login</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </ScrollView>
+    </KeyboardAvoidingView>
   );
 };
 
 const styles = StyleSheet.create({
   mainContainer: {
     backgroundColor: COLORS.Background,
-    height: SIZES.Height * 1,
     justifyContent: 'center',
     padding: 10,
+    flex: 1,
   },
   logo: {
     height: 150,
     width: 150,
     margin: 10,
     alignSelf: 'center',
+    marginTop: SIZES.Height * 0.2,
   },
   headerContainer: {
     alignItems: 'center',
