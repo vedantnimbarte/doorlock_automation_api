@@ -10,9 +10,7 @@ export const SIZES = {
 
 export const IMAGES = {
   Logo: require('../assets/images/logo.png'),
-  Plug: require('../assets/images/plug-icon.png'),
   DoorLock: require('../assets/images/door-lock-icon.png'),
-  BedRoom: require('../assets/images/bedroom.png'),
 };
 
 export const COLORS = {
