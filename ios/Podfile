@@ -12,6 +12,8 @@ target 'Door_Lock' do
     :hermes_enabled => false
   )
 
+  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
+
   target 'Door_LockTests' do
     inherit! :complete
     # Pods for testing
