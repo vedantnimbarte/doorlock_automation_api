@@ -9,6 +9,7 @@ import {
   KeyboardAvoidingView,
   ScrollView,
   ToastAndroid,
+  Alert,
 } from 'react-native';
 import {COLORS, IMAGES, SIZES} from '../constants/theme';
 import {CONFIG} from '../constants/config';
