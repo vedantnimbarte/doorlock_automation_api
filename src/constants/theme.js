@@ -17,4 +17,6 @@ export const COLORS = {
   Primary: '#FFC619',
   Background: '#000000',
   White: '#ffffff',
+  Gray: 'gray',
+  DarkGray: '#3B3B3B',
 };
