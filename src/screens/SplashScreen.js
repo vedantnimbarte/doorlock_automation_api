@@ -9,7 +9,7 @@ export default function SplashScreen({navigation}) {
   });
 
   const _validateUser = async () => {
-    const userData = await AsyncStorage.getItem('user');
+    const userData = await AsyncStorage.getItem('userDetails');
     if (userData) {
       navigation.navigate('Home');
     } else {
