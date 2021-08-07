@@ -11,7 +11,13 @@ import {
 } from 'react-native';
 import {COLORS, IMAGES, SIZES} from '../constants/theme';
 
-const Login = () => {
+const Login = ({navigation}) => {
+  const [email, setEmail] = React.useState();
+  const [password, setPassword] = React.useState();
+
+  const _loginHandler = () => {
+    navigation.navigate('Home');
+  };
   return (
     <KeyboardAvoidingView style={{flex: 1, backgroundColor: COLORS.Background}}>
       <ScrollView bounces={false} showsVerticalScrollIndicator={false}>
@@ -25,6 +31,8 @@ const Login = () => {
             <TextInput
               keyboardType="email-address"
               placeholder="Email"
+              value={email}
+              onChangeText={text => setEmail(text)}
               placeholderTextColor={COLORS.Primary}
               style={styles.inputField}
             />
@@ -32,10 +40,14 @@ const Login = () => {
               keyboardType="default"
               secureTextEntry={true}
               placeholder="Password"
+              value={password}
+              onChangeText={text => setPassword(text)}
               placeholderTextColor={COLORS.Primary}
               style={styles.inputField}
             />
-            <TouchableOpacity style={styles.loginBtn}>
+            <TouchableOpacity
+              style={styles.loginBtn}
+              onPress={() => _loginHandler()}>
               <Text style={styles.loginText}>Login</Text>
             </TouchableOpacity>
           </View>
