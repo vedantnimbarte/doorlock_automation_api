@@ -62,7 +62,7 @@ const Home = ({navigation}) => {
   return (
     <View style={styles.mainContainer}>
       <View style={styles.topContainer}>
-        <TouchableOpacity onPress={() => navigation.openDrawer()}>
+        <TouchableOpacity onPress={() => navigation.toggleDrawer()}>
           <Entypo name="menu" size={35} color={COLORS.Primary} />
         </TouchableOpacity>
         <Ionicons name="notifications" size={35} color={COLORS.Primary} />
