@@ -11,7 +11,7 @@ export default function SplashScreen({navigation}) {
   const _validateUser = async () => {
     const userData = await AsyncStorage.getItem('userDetails');
     if (userData) {
-      navigation.navigate('Home');
+      navigation.navigate('Drawer');
     } else {
       navigation.navigate('Login');
     }
