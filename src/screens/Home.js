@@ -19,6 +19,8 @@ const Home = ({navigation}) => {
     setInterval(() => {
       _getLock();
     }, 3000);
+
+    return clearInterval(_getLock()), setLockStatus(), setUser();
   }, []);
 
   const _getUserDetails = async () => {
