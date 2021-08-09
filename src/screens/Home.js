@@ -80,6 +80,7 @@ const styles = StyleSheet.create({
     color: COLORS.White,
     letterSpacing: 0.5,
     fontSize: 16,
+    lineHeight: 30,
   },
   userName: {
     color: COLORS.Primary,
