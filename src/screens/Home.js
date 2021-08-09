@@ -8,14 +8,17 @@ import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const Home = () => {
+const Home = ({navigation}) => {
   const [user, setUser] = React.useState();
-  const [lockStatus, setLockStatus] = React.useState(true);
+  const [lockStatus, setLockStatus] = React.useState();
   const [device, setDevice] = React.useState();
 
   React.useEffect(() => {
     _getUserDetails();
     _getLock();
+    setInterval(() => {
+      _getLock();
+    }, 3000);
   }, []);
 
   const _getUserDetails = async () => {
@@ -24,11 +27,14 @@ const Home = () => {
   };
 
   const _getLock = async () => {
+    const userData = await AsyncStorage.getItem('userDetails');
+    const user_data = JSON.parse(userData);
     const response = await fetch(
-      `http://${CONFIG.IP}:${CONFIG.PORT}/config/getLockAssignedToUser?user_id=${user.results[0].user_id}`,
+      `http://${CONFIG.IP}:${CONFIG.PORT}/config/getLockAssignedToUser?user_id=${user_data.results[0].user_id}`,
     );
     const result = await response.json();
     setDevice(result.results[0]);
+    setLockStatus(result.results[0].relay_status ? true : false);
   };
 
   const updateLockStatus = async () => {
@@ -56,7 +62,9 @@ const Home = () => {
   return (
     <View style={styles.mainContainer}>
       <View style={styles.topContainer}>
-        <Entypo name="menu" size={35} color={COLORS.Primary} />
+        <TouchableOpacity onPress={() => navigation.openDrawer()}>
+          <Entypo name="menu" size={35} color={COLORS.Primary} />
+        </TouchableOpacity>
         <Ionicons name="notifications" size={35} color={COLORS.Primary} />
       </View>
       <View style={styles.userInfoContainer}>
