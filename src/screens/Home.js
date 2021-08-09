@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, StyleSheet, Image} from 'react-native';
+import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import {COLORS, IMAGES, SIZES} from '../constants/theme';
 import {CONFIG} from '../constants/config';
 import Entypo from 'react-native-vector-icons/Entypo';
@@ -11,14 +11,45 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const Home = () => {
   const [user, setUser] = React.useState();
   const [lockStatus, setLockStatus] = React.useState(true);
+  const [device, setDevice] = React.useState();
 
   React.useEffect(() => {
     _getUserDetails();
+    _getLock();
   }, []);
 
   const _getUserDetails = async () => {
     const userData = await AsyncStorage.getItem('userDetails');
     setUser(JSON.parse(userData));
+  };
+
+  const _getLock = async () => {
+    const response = await fetch(
+      `http://${CONFIG.IP}:${CONFIG.PORT}/config/getLockAssignedToUser?user_id=${user.results[0].user_id}`,
+    );
+    const result = await response.json();
+    setDevice(result.results[0]);
+  };
+
+  const updateLockStatus = async () => {
+    let message = '0';
+    if (device.relay_status === 0) {
+      message = '1';
+    }
+    const response = await fetch(
+      `http://${CONFIG.IP}:${CONFIG.PORT}/device/${device.serial_no}/${device.relay}/${message}/${device.id}`,
+    );
+    const result = await response.json();
+    if (result.success > 0) {
+      setTimeout(() => {
+        _getLock();
+      }, 1000);
+    }
+    if (device.relay_status === 1) {
+      setLockStatus(true);
+    } else {
+      setLockStatus(false);
+    }
   };
 
   return (
@@ -39,7 +70,9 @@ const Home = () => {
       <View style={styles.doorLockIconContainer}>
         <Image source={IMAGES.DoorLock} style={styles.DoorLockIcon} />
       </View>
-      <View style={styles.doorLockContainer}>
+      <TouchableOpacity
+        style={styles.doorLockContainer}
+        onPress={() => updateLockStatus()}>
         <View>
           <Text style={styles.lockName}>Door</Text>
           <Text style={styles.lockStatus}>
@@ -51,7 +84,7 @@ const Home = () => {
           size={35}
           color={lockStatus ? COLORS.Primary : COLORS.White}
         />
-      </View>
+      </TouchableOpacity>
     </View>
   );
 };
