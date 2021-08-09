@@ -37,7 +37,7 @@ const Login = ({navigation}) => {
 
     if (result.success === 1) {
       await AsyncStorage.setItem('userDetails', JSON.stringify(result));
-      _navigationHandler('Home');
+      _navigationHandler('Drawer');
     } else {
       Alert.alert(
         result.message,
