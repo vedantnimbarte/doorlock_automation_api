@@ -41,9 +41,10 @@ const Home = () => {
     );
     const result = await response.json();
     if (result.success > 0) {
-      setTimeout(() => {
-        _getLock();
-      }, 1000);
+      _getLock();
+      // setTimeout(() => {
+      //   _getLock();
+      // }, 1000);
     }
     if (device.relay_status === 1) {
       setLockStatus(true);
